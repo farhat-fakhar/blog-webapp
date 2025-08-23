@@ -43,7 +43,7 @@ export default function CatalogPage() {
     result =
       selectedCategory === "All"
         ? result
-        : result.filter((blog) => blog.category === selectedCategory);
+        : result?.filter((blog) => blog.category === selectedCategory);
     if (searchParam.trim()) {
       result = result.filter((blog) => blog.title.toLowerCase().includes(searchParam.toLowerCase()));
      }
@@ -86,7 +86,7 @@ export default function CatalogPage() {
       </div>
 
       {/* Blog Grid */}
-      {filterBlogs.length > 0 ? (
+      {filterBlogs?.length > 0 ? (
         <div className="grid gap-4  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 px-10">
           {filterBlogs.map((blog) => (
             <div
