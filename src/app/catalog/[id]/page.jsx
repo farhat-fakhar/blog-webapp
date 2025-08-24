@@ -88,7 +88,7 @@ const BlogDetailPage = ({ params }) => {
 
         {/* Comments Section */}
         <div className="w-full lg:w-1/2">
-          <Comments id={blog._id} />
+          <Comments blogId={blog._id} />
         </div>
         <DisplayComments id={blog._id} />
       </div>

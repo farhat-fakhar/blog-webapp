@@ -1,17 +1,19 @@
 "use client";
-import { Button, Dialog, Text, VisuallyHidden } from "@radix-ui/themes";
+import { Text } from "@radix-ui/themes";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
- 
+import { AuthContext } from "../lib/context/AuthContext";
+import { usePathname } from "next/navigation";
+import React, { useContext } from "react";
+
 const Navbar = () => {
+  const { user, logout } = useContext(AuthContext);
   const pathname = usePathname();
-   const navLinks = [
+
+  const navLinks = [
     { name: "Home", path: "/" },
     { name: "Blogs", path: "/catalog" },
-    { name: "Dashboard", path: "/admin" }
   ];
- 
+
   return (
     <nav className="w-full sticky top-0 z-50 bg-gray-100 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,7 +44,41 @@ const Navbar = () => {
 
           {/* Right Corner Auth Buttons */}
           <div className="flex items-center space-x-4">
-            
+            {user ? (
+              <>
+                <Link
+                  href="/admin"
+                  className={`transition-colors duration-200 ${
+                    pathname === "/admin"
+                      ? "text-green-900  font-bold text-lg"
+                      : "text-green-700 hover:text-black"
+                  }`}
+                >
+                  Dashboard
+                </Link>
+                <button
+                 onClick={logout}
+                  className="px-3 py-1 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/catalog/login"
+                  className="px-3 py-1 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/catalog/login"
+                  className="px-3 py-1 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

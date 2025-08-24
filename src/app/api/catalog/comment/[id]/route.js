@@ -1,11 +1,7 @@
-import mongoose from "mongoose";
-import { NextResponse } from "next/server";
+ import { NextResponse } from "next/server";
 import { comment } from "../../../../lib/Models/comments";
-const connectDB = async () => {
-  if (mongoose.connection.readyState !== 1) {
-    await mongoose.connect(process.env.connectionStr);
-  }
-};
+import connectDB from "../../../../lib/db";
+ 
 export const DELETE = async (req, { params }) => {
   const { id } = params;
   try {

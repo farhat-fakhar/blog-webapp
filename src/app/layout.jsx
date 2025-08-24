@@ -4,6 +4,7 @@ import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 import Navbar from "./_components/Navbar";
 import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "./lib/context/AuthContext";
 
 // Initialize fonts
 const geistSans = Geist({
@@ -29,9 +30,12 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Theme>
-          <Navbar />
+          <AuthProvider>
+            <Navbar />
 
-          {children}
+            {children}
+          </AuthProvider>
+
           <ToastContainer position="top-right" autoClose={3000} />
         </Theme>
       </body>

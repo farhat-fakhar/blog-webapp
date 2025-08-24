@@ -69,7 +69,7 @@ export default function EditBlogPage({params}) {
 
     try {
       let response = await axios.put(
-        `/api/catalog/edit/${props.params?.id}`,
+        `/api/catalog/edit/${id}`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

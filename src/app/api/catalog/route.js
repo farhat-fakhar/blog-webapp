@@ -1,8 +1,8 @@
 import fs from "fs/promises";
 import path from "path";
-import mongoose from "mongoose";
-import { NextResponse } from "next/server";
+ import { NextResponse } from "next/server";
 import { postSchema } from "../../lib/Models/post";
+import connectDB from "../../lib/db";
 
 export async function POST(request) {
   try {
@@ -27,7 +27,7 @@ export async function POST(request) {
 
     const image = `/upload/${filename}`;
 
-    await mongoose.connect(process.env.connectionStr);
+    await connectDB()
     const result = new postSchema({ title, content, category, image, author });
     await result.save();
 
@@ -44,7 +44,7 @@ export async function GET() {
   let success = false;
 
   try {
-    await mongoose.connect(process.env.connectionStr);
+    await connectDB()
     let result = await postSchema.find();
     if (result) {
       success = true;

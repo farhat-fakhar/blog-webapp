@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
 import { postSchema } from "../../../../lib/Models/post";
 import { NextResponse } from "next/server";
+import connectDB from "../../../../lib/db";
 
 export async function GET(req, context) {
   let id=context.params.id
   let success = false;
 
   try {
-    await mongoose.connect(process.env.connectionStr);
+    await connectDB()
     let result = await postSchema.findById(id);
      if (result) {
       success = true;

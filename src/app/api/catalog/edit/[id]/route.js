@@ -3,6 +3,7 @@ import fs from "fs/promises";
 import { postSchema } from "../../../../lib/Models/post";
 import { NextResponse } from "next/server";
 import path from "path";
+import connectDB from "../../../../lib/db";
 
 
 
@@ -11,7 +12,7 @@ export async function GET(req, context) {
 
   let success = false;
   try {
-    await mongoose.connect(process.env.connectionStr);
+    await connectDB()
     let result = await postSchema.findOne({ _id: id });
      if (result) {
       success = true;
@@ -52,8 +53,7 @@ export async function PUT(req, context) {
 
   let success = false;
   try {
-    await mongoose.connect(process.env.connectionStr);
-
+    await connectDB()
     const updateData = { title, category, content, author };
     if (imagePath) updateData.image = imagePath;
 

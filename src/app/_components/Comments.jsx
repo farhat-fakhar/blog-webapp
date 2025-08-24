@@ -11,20 +11,15 @@ export default function Comments({blogId}) {
     message: "",
    });
    const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const {name, value}=e.target
+    setFormData((prevData)=>({...prevData, [name]:value}));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+     
     try {
-      let response = await axios.post("/api/catalog/comment", {...formData, blogId}, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      let response = await axios.post("/api/catalog/comment", {...formData, blogId});
       if (response.status === 201 || response.status === 200) {
          toast.success("Comment Submitted Successfully! ")
         console.log("comment added: ", response.data.result);

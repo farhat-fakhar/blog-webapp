@@ -18,7 +18,7 @@ export const POST = async (req) => {
     if (!user) {
       return NextResponse.json({ success: false, message: "user not found!" });
     }
-    const isMatch = bcrypt.compare(password, user.password);
+    const isMatch =await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return NextResponse.json({
         success: false,
