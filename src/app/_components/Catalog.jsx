@@ -23,7 +23,7 @@ export default function CatalogPage() {
   // handle api load
   const apiLoad = async () => {
     try {
-      let response = await axios.get("/api/catalog");
+      let response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/catalog`);
       if (response.status === 200) {
         setBlogs(response.data.result || []);
         setFilterBlogs(response.data.result);
